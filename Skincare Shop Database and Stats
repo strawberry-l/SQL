@@ -1,0 +1,28 @@
+--Create a skincare shop database
+
+CREATE TABLE skincare (id INTEGER PRIMARY KEY, name TEXT, brand TEXT, category TEXT, price NUMERIC, aisle INTEGER, stock_on_hand INTEGER);
+
+INSERT INTO skincare VALUES (1, "Protini polypeptide firming moisturizer", "Drunk Elephant", "moisturizers", 27.00, 5, 28);
+INSERT INTO skincare VALUES (2, "Watermelon Glow AHA night treatment", "Glow Recipe", "moisturizer", 29.50, 5, 55);
+INSERT INTO skincare VALUES (3, "Mini rice wash skin-softening cleanser", "Tatcha", "cleansers", 23.99, 1, 32);
+INSERT INTO skincare VALUES (4, "Blue Tansy BHA and Enzyme Pore refining mask", "Herbivore", "masks", 66.00, 2, 78);
+INSERT INTO skincare VALUES (5, "Unseen Sunscreen", "Supergoop", "sunscreens", 29.75, 3, 44);
+INSERT INTO skincare VALUES (6, "Ultra sun protection SPF", "Shiseido", "sunscreens", 54.00, 3, 35);
+INSERT INTO skincare VALUES (7, "SuperSolutions 1% retinol serum", "The inkey list", "treatments", 29.99, 5, 74);
+INSERT INTO skincare VALUES (8, "5 Minute Facial for Megawatt Glow", "Tata Harper", "gift sets", 25.00, 2, 25);
+INSERT INTO skincare VALUES (9, "Fruit Babies Bestsellers Kit", "Glow Recipe", "gift sets", 46.00, 2, 60);
+INSERT INTO skincare VALUES (10, "Milky Oil Dual Phase Waterproof Makeup Remover", "Glossier", "cleansers", 19.00, 1, 50);
+INSERT INTO skincare VALUES (11, "Liquid Peelfoliant", "Dermalogica", "treatments", 89.00, 5, 30);
+INSERT INTO skincare VALUES (12, "Lip Butter Balm", "Summer Fridays", "treatments", 31, 5, 23);
+INSERT INTO skincare VALUES (13, "Clean Face Masks", "Sephora", "masks", 8.00, 2, 100);
+INSERT INTO skincare VALUES (14, "Multipeptide Serum", "The Ordinary", "treatments", 20.40, 5, 65);
+INSERT INTO skincare VALUES (15, "B Oil", "The Oridnary", "moisturizers", 12.90, 5, 70);
+
+--display the database ordered by price
+SELECT * FROM skincare ORDER BY price;
+
+--how many items left per type of product on each aisle?
+SELECT aisle, SUM(stock_on_hand) FROM skincare GROUP BY aisle;
+
+--display the most sold items from the shop
+SELECT name, sold FROM skincare ORDER by sold DESC
