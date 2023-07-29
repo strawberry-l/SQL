@@ -73,6 +73,14 @@ SELECT a.name AS artist_1, b.name AS artist_2  FROM collaboration
     ON collaboration.singer1_id = a.id
     JOIN singers b
     ON collaboration.singer2_id = b.id;
-    
 
+--display list of singers and albums released before 2010
+SELECT name, title AS album, released FROM singers
+    JOIN album
+    ON singers.id = album.singer_id
+    WHERE released <2010;
+
+--display total no. of albums released before and after 2010
+SELECT COUNT (*) AS albums_released_before_2010 FROM album WHERE released <2010;
+SELECT COUNT (*) AS albums_released_2010_and_after FROM album WHERE released >=2010;
 
