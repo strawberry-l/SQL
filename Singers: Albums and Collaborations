@@ -1,0 +1,78 @@
+CREATE TABLE singers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER,
+    hometown TEXT,
+    gender TEXT,
+    status TEXT);
+    
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Taylor Swift", "30", "Texas", "f", "single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Ed Sheeran", "32", "Halifax", "m", "married");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Pink",  "43", "Chicago", "f", "married");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Beyonce", "45", "New York", "f", "married");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Britney Spears", "37", "Louisiana", "f", "married");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Adele", "35", "Wales", "f", "single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Katy Perry", "38", "California", "f", "married");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("The Weekend", "29", "Florida", "m", "single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Outkast", "56", "Chicago", "m", "single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Amy Winehouse", "27", "London", "f", "single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Zedd", "29", "Florida", "m",	"single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Hailey Steinfeld", "28", "California", "f", "single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Selena Gomez", "31", "Philadelphia", "f", "single");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Jonas Blue", "38"	, "New York", "m", "married");
+INSERT INTO singers (name, age, hometown, gender, status) VALUES ("Alessia Cara",	 "25", "Vancouver", "f", "single");
+
+
+CREATE TABLE album (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    singer_id INTEGER,
+    title TEXT,
+    released INTEGER,
+    billboard_rank INTEGER,
+    singles_rel INTEGER);
+    
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (1, 1989, 2014, 1, 7);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (2, "Divide", 2017, 1, 5);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (3, "Missundaztood", 2001, 4, 6);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (4, "Dangerously In Love", 2003, 1, 8);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (5, "Femme Fatale", 2011, 1, 6);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (6, 21, 2011, 1, 8);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (7, "Teenage Dream", 2010, 1, 4);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (8, "Trilogy", 2012, 8, 5);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (9, "Idlewild", 2006, 21, 3);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (10, "Back to Black", 2006, 2, 5);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (11, "Clarity", 2012, 1,	5);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (12, "Haiz",	2015, 15, 3);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (13, "Rare", 2020, 7, 9);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (14, "Blue", 2018, 1, 10);
+INSERT INTO album (singer_id, title, released, billboard_rank, singles_rel) VALUES (15, "Duality", 2022, 23, 7);
+
+
+CREATE TABLE collaboration (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    singer1_id INTEGER,
+    singer2_id INTEGER);
+    
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (1, 2);
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (4, 5);
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (3, 10);
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (6, 8);
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (7, 9);
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (11, 15);
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (12, 14);
+INSERT INTO collaboration (singer1_id, singer2_id) VALUES (11, 13);
+
+--display list of singers and albums
+SELECT singers.name AS artists, album.title AS album FROM singers
+    JOIN album
+    ON singers.id = album.singer_id;
+
+--display singers that have song collaborations
+SELECT a.name AS artist_1, b.name AS artist_2  FROM collaboration
+    JOIN singers a
+    ON collaboration.singer1_id = a.id
+    JOIN singers b
+    ON collaboration.singer2_id = b.id;
+    
+
+
