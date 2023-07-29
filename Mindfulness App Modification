@@ -1,0 +1,45 @@
+CREATE TABLE mindfulness (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    date TEXT,
+    duration INTEGER,
+    environment TEXT,
+    affirmation TEXT);
+    
+INSERT INTO mindfulness (date, duration, environment, affirmation) VALUES ("2023-01-10", "15",	"room", "I can do it");
+INSERT INTO mindfulness (date, duration, environment, affirmation) VALUES ("2023-01-15", "10", "living room", "I got this");
+INSERT INTO mindfulness (date, duration, environment, affirmation) VALUES ("2023-02-01", "5", "park", "good things will happen");
+INSERT INTO mindfulness (date, duration, environment, affirmation) VALUES ("2023-02-17", "7", "office", "keep at it");
+INSERT INTO mindfulness (date, duration, environment, affirmation) VALUES ("2023-03-22", "10", "room", "I'm worth it");
+
+SELECT * FROM mindfulness;
+
+UPDATE mindfulness SET environment = "bedroom" WHERE environment = "room";
+
+SELECT * FROM mindfulness;
+
+ALTER TABLE mindfulness ADD mood TEXT;
+
+INSERT INTO mindfulness (date, duration, environment, affirmation, mood) VALUES ("2023-03-30", "8", "bedroom", "keep swimming", "determined");
+
+--display contents from table
+SELECT * FROM mindfulness;
+
+--display updated info after initial entry
+UPDATE mindfulness SET mood = "determined"     WHERE date = "2023-01-10";
+UPDATE mindfulness SET mood = "hopeful"       WHERE date = "2023-01-15";
+UPDATE mindfulness SET mood = "inspired"     WHERE date = "2023-02-01";
+UPDATE mindfulness SET mood = "drained"     WHERE date = "2023-02-17";
+UPDATE mindfulness SET mood = "depressed"     WHERE date = "2023-03-22";
+
+SELECT * FROM mindfulness;
+
+--display deletion of entry 
+DELETE FROM mindfulness WHERE duration = 5;
+
+SELECT * FROM mindfulness;
+
+
+
+
+
+
