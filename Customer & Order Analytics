@@ -50,3 +50,33 @@ ON FEB.orderid=cust.order_id
 WHERE Feb.Quantity>2
 AND length(orderid) = 6 
 AND orderid <> 'Order ID'
+
+--displaying order dates between a specified time
+SELECT orderdate
+FROM BIT_DB.FebSales
+WHERE orderdate between '02/13/19 00:00' AND '02/18/19 00:00'
+
+--displaying location from a certain order at a particular time
+SELECT location
+FROM BIT_DB.FebSales 
+WHERE orderdate = '02/18/19 01:35'
+
+-displaying the total number of items ordered on a particular date regardless of time
+SELECT sum(quantity)
+FROM BIT_DB.FebSales 
+WHERE orderdate like '02/18/19%'
+
+--displaying all products that contains the word battery from the inventory
+SELECT distinct Product
+FROM BIT_DB.FebSales
+WHERE Product like '%Batteries%'
+
+--displaying all products from FebSales that ends in .99
+SELECT distinct Product, Price
+FROM BIT_DB.FebSales 
+WHERE Price like '%.99'
+
+--displaying products and quantities from sales from customers living in Los Angeles
+SELECT product, quantity
+FROM BIT_DB.febsales
+WHERE location like '%Los Angeles%'
