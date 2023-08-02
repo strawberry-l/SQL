@@ -76,6 +76,7 @@ SELECT product, SUM(quantity)
 FROM BIT_DB.febsales
 WHERE location like '%Los Angeles%'
 GROUP BY product
+
 --displaying products and quantities from sales from customers living in Los Angeles
 SELECT product, quantity
 FROM BIT_DB.febsales
