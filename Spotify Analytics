@@ -63,3 +63,46 @@ SELECT AVG(danceability) FROM BIT_DB.Spotifydata
 WHERE popularity IN (SELECT popularity
 FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC LIMIT 10)
+
+
+#6 How many songs does an artist have from this list
+SELECT artist_name, COUNT(*)
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY COUNT(*) DESC
+
+
+#7 Categorized songs by their keys using CASE (if >8 is high, >5 is mid and all esle is low)
+
+SELECT track_name, song_key,
+    CASE 
+        WHEN song_key > 8 THEN 'high'
+        WHEN song_key > 5 THEN 'mid'
+        ELSE 'low'
+    END AS key_level
+FROM BIT_DB.Spotifydata
+
+
+#8 Summarized how many songs in the list that belongs to each category
+SELECT COUNT (8),
+    CASE 
+        WHEN song_key > 8 THEN 'high'
+        WHEN song_key > 5 THEN 'mid'
+        ELSE 'low'
+    END AS key_level
+FROM BIT_DB.Spotifydata
+GROUP BY key_level
+
+
+#9 Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 
+90 or above, show their name, their average popularity, and label them as a “Top Star”.
+
+WITH avg_popularity AS (
+    SELECT s.artist_name, 
+    AVG(s.popularity) AS avgpop
+    FROM Spotifydata s
+    GROUP BY s.artist_name)
+
+SELECT artist_name, avgpop, 'Top Star' AS tag
+FROM avg_popularity
+WHERE avgpop >=90
