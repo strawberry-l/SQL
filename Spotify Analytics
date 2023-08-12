@@ -28,7 +28,8 @@ time_signature integer NOT NULL
 
 #Next, I explored the data using the following SQL. 
 
---
+-------------
+
 #1 What is the average danceability by artist and track?
 
 SELECT artist_name, track_name, AVG(danceability)
@@ -36,6 +37,7 @@ FROM BIT_DB.Spotifydata
 GROUP BY artist_name
 ORDER BY danceability DESC
 
+-------------
 
 #2 Who are the top 10 artists based on popularity?
 
@@ -44,11 +46,13 @@ FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC
 LIMIT 10
 
+-------------
 
 #3 Which artist released the longest song?
 SELECT artist_name, track_name, MAX(duration_ms)
 FROM BIT_DB.Spotifydata
 
+-------------
 
 #4 Top 10 popular songs
 
@@ -56,6 +60,7 @@ SELECT track_name, popularity, danceability
 FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC LIMIT 10
 
+-------------
 
 #5 What's the average danceability for the 10 most popular songs?
 
@@ -64,6 +69,7 @@ WHERE popularity IN (SELECT popularity
 FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC LIMIT 10)
 
+-------------
 
 #6 How many songs does an artist have from this list
 SELECT artist_name, COUNT(*)
@@ -71,6 +77,7 @@ FROM BIT_DB.Spotifydata
 GROUP BY artist_name
 ORDER BY COUNT(*) DESC
 
+-------------
 
 #7 Categorized songs by their keys using CASE (if >8 is high, >5 is mid and all esle is low)
 
@@ -82,6 +89,7 @@ SELECT track_name, song_key,
     END AS key_level
 FROM BIT_DB.Spotifydata
 
+-------------
 
 #8 Summarized how many songs in the list that belongs to each category
 SELECT COUNT (8),
@@ -93,6 +101,7 @@ SELECT COUNT (8),
 FROM BIT_DB.Spotifydata
 GROUP BY key_level
 
+-------------
 
 #9 Calculate the average popularity for the artists in the Spotify data table. Then, for every artist with an average popularity of 
 90 or above, show their name, their average popularity, and label them as a “Top Star”.
@@ -106,3 +115,18 @@ WITH avg_popularity AS (
 SELECT artist_name, avgpop, 'Top Star' AS tag
 FROM avg_popularity
 WHERE avgpop >=90
+
+-------------
+
+#10 Rank the artists popularity based on how many songs they have in the top 50   
+
+SELECT artist_name, COUNT(artist_name) as total_songs,
+CASE
+    WHEN COUNT(artist_name) >=4 THEN 'Most Popular'
+    WHEN COUNT(artist_name) >=3 THEN 'Second Most Popular'
+    WHEN COUNT(artist_name) >=2 THEN 'Third Most Popular'
+    ELSE 'unranked'
+END AS artist_popularity
+FROM BIT_DB.Spotifydata
+GROUP BY artist_name
+ORDER BY total_songs DESC
